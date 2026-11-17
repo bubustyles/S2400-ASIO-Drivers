@@ -1,0 +1,55 @@
+﻿S2400 ASIO Drivers - Nutzung, Support und Haftung
+=================================================
+
+Diese Software ist ein privates Projekt. Ich habe sie ursprünglich nur für
+mein eigenes Studio geschrieben und stelle sie jetzt kostenlos allen zur
+Verfügung, die sie nützlich finden.
+
+Copyright (C) 2026 David Ritter
+
+LIZENZ UND QUELLCODE
+Die Software ist freie Software unter der GNU General Public License,
+Version 3 (GPLv3). Du darfst sie nutzen, weitergeben und verändern, wenn du
+die Bedingungen der GPLv3 einhältst. Der vollständige Lizenztext liegt als
+LICENSE.txt im Programmordner, der Quellcode steht hier:
+https://github.com/bubustyles/S2400-ASIO-Drivers
+
+NUR WINDOWS
+Die Software läuft bisher ausschließlich unter Windows (64 Bit). Eine
+Version für macOS oder andere Systeme gibt es nicht.
+
+KEIN SUPPORT
+Ich kann keine Unterstützung, Beratung oder Fehlerbehebung leisten und keine
+Anfragen beantworten. Es besteht kein Anspruch auf Updates, Korrekturen oder
+neue Funktionen.
+
+KEINE GEWÄHRLEISTUNG
+Die Software wird so bereitgestellt, wie sie ist. Ich übernehme keine
+Garantie dafür, dass sie fehlerfrei läuft, mit deiner Hardware oder Software
+zusammenarbeitet oder für einen bestimmten Zweck geeignet ist.
+
+KEINE HAFTUNG
+Die Nutzung erfolgt auf eigene Gefahr. Soweit gesetzlich zulässig, hafte ich
+nicht für Schäden, die durch die Installation oder Nutzung entstehen - etwa
+Datenverlust, verlorene Aufnahmen, Ausfälle oder Schäden an Hardware,
+Software oder Gehör. Unberührt bleibt die Haftung, die gesetzlich nicht
+ausgeschlossen werden kann (insbesondere bei Vorsatz und grober
+Fahrlässigkeit).
+
+LAUTSTÄRKE
+Treiber und Programme greifen direkt in den Audioweg ein. Stelle Abhöre und
+Kopfhörer beim ersten Start leise.
+
+KEIN PRODUKT VON ISLA INSTRUMENTS
+Die Software ist unabhängig entstanden und wird von ISLA Instruments weder
+vertrieben noch unterstützt. Bitte wende dich mit Fragen zu dieser Software
+nicht an ISLA Instruments.
+
+MARKEN
+ASIO ist eine eingetragene Marke der Steinberg Media Technologies GmbH.
+ASIO is a registered trademark of Steinberg Media Technologies GmbH.
+ISLA Instruments und S2400 sind Marken ihrer jeweiligen Inhaber. Alle anderen genannten Namen
+gehören ihren Inhabern.
+
+Mit der Installation erklärst du dich mit diesen Bedingungen einverstanden.
+Deine Rechte aus der GPLv3 bleiben davon unberührt.

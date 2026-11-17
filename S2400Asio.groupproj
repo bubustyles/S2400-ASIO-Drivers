@@ -1,0 +1,84 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{B1E7CF06-F219-4243-9F4B-C7DBBA489CF8}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="S2400AsioDriver.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="S2400Aggregate.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="S2400Monitor.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="S2400MixerApp.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="S2400ZuspielerApp.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="S2400AsioDriver">
+        <MSBuild Projects="S2400AsioDriver.dproj"/>
+    </Target>
+    <Target Name="S2400AsioDriver:Clean">
+        <MSBuild Projects="S2400AsioDriver.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="S2400AsioDriver:Make">
+        <MSBuild Projects="S2400AsioDriver.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="S2400Aggregate">
+        <MSBuild Projects="S2400Aggregate.dproj"/>
+    </Target>
+    <Target Name="S2400Aggregate:Clean">
+        <MSBuild Projects="S2400Aggregate.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="S2400Aggregate:Make">
+        <MSBuild Projects="S2400Aggregate.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="S2400Monitor">
+        <MSBuild Projects="S2400Monitor.dproj"/>
+    </Target>
+    <Target Name="S2400Monitor:Clean">
+        <MSBuild Projects="S2400Monitor.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="S2400Monitor:Make">
+        <MSBuild Projects="S2400Monitor.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="S2400MixerApp">
+        <MSBuild Projects="S2400MixerApp.dproj"/>
+    </Target>
+    <Target Name="S2400MixerApp:Clean">
+        <MSBuild Projects="S2400MixerApp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="S2400MixerApp:Make">
+        <MSBuild Projects="S2400MixerApp.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="S2400ZuspielerApp">
+        <MSBuild Projects="S2400ZuspielerApp.dproj"/>
+    </Target>
+    <Target Name="S2400ZuspielerApp:Clean">
+        <MSBuild Projects="S2400ZuspielerApp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="S2400ZuspielerApp:Make">
+        <MSBuild Projects="S2400ZuspielerApp.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="S2400AsioDriver;S2400Aggregate;S2400Monitor;S2400MixerApp;S2400ZuspielerApp"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="S2400AsioDriver:Clean;S2400Aggregate:Clean;S2400Monitor:Clean;S2400MixerApp:Clean;S2400ZuspielerApp:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="S2400AsioDriver:Make;S2400Aggregate:Make;S2400Monitor:Make;S2400MixerApp:Make;S2400ZuspielerApp:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

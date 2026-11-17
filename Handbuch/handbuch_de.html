@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>S2400 ASIO Drivers – Software-Handbuch</title>
+<style>
+  @page { size: A4; margin: 18mm 17mm 18mm 17mm; }
+  :root { --amber: #EF9F27; --ink: #1d1e21; --muted: #5c5f66; --line: #d9d6cf; --panel: #f4f2ee; --dark: #2B2D31; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Segoe UI", Arial, sans-serif; font-size: 10.2pt; line-height: 1.5; color: var(--ink); background: #fff; margin: 0; }
+  h1, h2, h3 { font-weight: 600; line-height: 1.25; }
+  h2 { font-size: 17pt; margin: 0 0 4mm; padding-bottom: 2mm; border-bottom: 2px solid var(--amber); break-before: page; }
+  h3 { font-size: 12pt; margin: 6mm 0 2mm; }
+  p { margin: 0 0 2.5mm; }
+  ul, ol { margin: 0 0 3mm; padding-left: 6mm; }
+  li { margin-bottom: 1mm; }
+  b, strong { font-weight: 600; }
+  .ui { font-weight: 600; letter-spacing: .02em; background: var(--panel); border: 1px solid var(--line); border-radius: 3px; padding: 0 1.4mm; white-space: nowrap; }
+  code { font-family: Consolas, monospace; font-size: 9.2pt; background: var(--panel); padding: 0 1mm; border-radius: 2px; }
+  table { border-collapse: collapse; width: 100%; margin: 2mm 0 4mm; font-size: 9.6pt; }
+  th, td { text-align: left; vertical-align: top; padding: 1.6mm 2.4mm; border-bottom: 1px solid var(--line); }
+  th { background: var(--panel); font-weight: 600; }
+  .note { border-left: 3px solid var(--amber); background: #fbf6ec; padding: 2.4mm 3.4mm; margin: 3mm 0 4mm; break-inside: avoid; }
+  .note.warn { border-left-color: #c0392b; background: #fbeeec; }
+  figure { margin: 4mm 0 5mm; break-inside: avoid; text-align: center; }
+  figure img { max-width: 90%; max-height: 100mm; border: 1px solid #111; border-radius: 4px; }
+  figcaption { font-size: 8.8pt; color: var(--muted); margin-top: 1.5mm; }
+  .ph { border: 1.5px dashed #b9b4aa; border-radius: 4px; padding: 14mm 6mm; color: var(--muted); background: var(--panel); font-size: 9.5pt; }
+  /* Titelseite */
+  .cover { height: 255mm; display: flex; flex-direction: column; justify-content: space-between; }
+  .cover .band { background: var(--dark); color: #eee; border-radius: 6px; padding: 16mm 14mm; }
+  .cover .kicker { color: var(--amber); font-size: 10pt; letter-spacing: .25em; text-transform: uppercase; font-weight: 600; }
+  .cover h1 { font-size: 30pt; margin: 4mm 0 3mm; color: #fff; }
+  .cover .sub { font-size: 12pt; color: #cfcfcf; }
+  .cover .meta { color: var(--muted); font-size: 9.5pt; }
+  .cover .asio { display: flex; align-items: center; gap: 4mm; margin-top: 9mm; }
+  .cover .asio img { height: 15mm; }
+  .cover .asio span { font-size: 8.5pt; color: #b5b5b5; line-height: 1.35; }
+  .toc { columns: 1; }
+  .toc ol { padding-left: 5mm; }
+  .toc li { margin-bottom: 1.4mm; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div class="band">
+    <div class="kicker">Software-Handbuch · Windows</div>
+    <h1>S2400 ASIO Drivers</h1>
+    <div class="sub">Treiber und Programme für die ISLA S2400<br>Isla-Treiber · Verbund „S2400 Aggregate“ · S2400 Monitor · Isla-Mixer · Isla-Zuspieler</div>
+  <div class="asio"><img src="img/asio_logo.png" alt="ASIO Compatible"><span>ASIO is a registered trademark of<br>Steinberg Media Technologies GmbH.</span></div>
+  </div>
+  <div>
+    <h3>Inhalt</h3>
+    <div class="toc">
+      <ol>
+        <li>Überblick</li>
+        <li>Installation</li>
+        <li>ISLA S2400 ASIO Driver – die Isla allein</li>
+        <li>S2400 Aggregate – die Isla zusammen mit einem anderen ASIO-Gerät</li>
+        <li>Isla-Monitoring und S2400 Monitor</li>
+        <li>Isla-Mixer</li>
+        <li>Isla-Zuspieler – Samples in die Isla spielen</li>
+        <li>Wichtige Hinweise und Fehlersuche</li>
+        <li>Nutzung, Support und Haftung</li>
+      </ol>
+    </div>
+  </div>
+  <div class="meta">Software-Handbuch zu S2400 ASIO Drivers {{VERSION}} · Stand {{DATUM}}<br>
+  Kein offizielles Produkt von ISLA Instruments. Die Bedienung der S2400 selbst beschreibt das Handbuch von ISLA Instruments. Freie Software unter der GPLv3 · Copyright (C) 2026 David Ritter · Quellcode: https://github.com/bubustyles/S2400-ASIO-Drivers<br>ASIO is a registered trademark of Steinberg Media Technologies GmbH.</div>
+</section>
+
+<!-- ============================================================ -->
+<h2>1 Überblick</h2>
+<p>Das Paket bringt die ISLA S2400 unter Windows als echtes ASIO®-Gerät in deine Audio-Software (DAW) – mit eigenen Treibern, die direkt über Kernel Streaming mit der Isla sprechen. Dazu kommen drei Programme für die Arbeit rund um die Isla.</p>
+<table>
+  <tr><th style="width:32%">Teil</th><th>Wofür</th></tr>
+  <tr><td><b>ISLA S2400 ASIO Driver</b></td><td>Die Isla allein als ASIO-Gerät: 10 Eingänge, 2 Ausgänge.</td></tr>
+  <tr><td><b>S2400 Aggregate</b></td><td>Verbund: ein anderes ASIO-Gerät (dein Audio-Interface) als Taktgeber, die Isla läuft im Takt mit, optional ein Windows-Ausgang (z.B. die Onboard-Soundkarte). Alles erscheint als <i>ein</i> ASIO-Gerät.</td></tr>
+  <tr><td><b>S2400 Monitor</b></td><td>Kleines Programm im Infobereich der Taskleiste. Hält den Verbund offen, damit du die Isla auch ohne Audio-Software hörst.</td></tr>
+  <tr><td><b>S2400 Isla-Mixer</b></td><td>Pegel, Panorama und Routing der Isla-Kanäle auf die Ausgänge deines Audio-Interfaces.</td></tr>
+  <tr><td><b>S2400 Zuspieler</b></td><td>Spielt Samples und Loops (z.B. von Splice) über die Onboard-Soundkarte analog in die Isla – mit Plattenspieler-Tempo, Stacks, Einzelsounds aus Drumloops.</td></tr>
+</table>
+<div class="note">Für den <b>Verbund</b> brauchst du neben der Isla ein weiteres ASIO-Gerät als Master (dein Audio-Interface). Der <b>Isla-Treiber allein</b> braucht nichts weiter.</div>
+<div class="note warn"><b>Nur für Windows (64 Bit).</b> Die Software ist ein privates Projekt, das ich für mich selbst geschrieben habe und jetzt kostenlos für alle freigebe. Es gibt <b>keinen Support</b> und <b>keine Gewährleistung</b> – Einzelheiten in Kapitel 9.</div>
+
+<!-- ============================================================ -->
+<h2>2 Installation</h2>
+<ol>
+  <li>Audio-Programme schließen, die einen der S2400-Treiber benutzen, sowie Zuspieler und Isla-Mixer.</li>
+  <li>Setup <code>S2400_ASIO_Drivers_Setup_{{VERSION}}.exe</code> als Administrator starten und die Sprache wählen.</li>
+  <li>Komponenten wählen:
+    <ul>
+      <li><b>ISLA S2400 ASIO Driver</b> – die Isla allein als ASIO-Gerät.</li>
+      <li><b>S2400 Aggregate</b> – der Verbund, dazu S2400 Monitor, Zuspieler und Isla-Mixer.</li>
+    </ul></li>
+  <li>Aufgaben: <span class="ui">S2400 Monitor mit Windows starten</span> (empfohlen, wenn du die Isla ohne Audio-Software hören willst) und auf Wunsch Desktop-Symbole für Zuspieler und Isla-Mixer.</li>
+</ol>
+<p>Ein Update installierst du einfach über die vorhandene Version – Einstellungen bleiben erhalten. Zuspieler und Isla-Mixer stehen danach im Startmenü; zum Anheften Rechtsklick auf das Symbol → <span class="ui">An Taskleiste anheften</span>.</p>
+
+<!-- ============================================================ -->
+<h2>3 ISLA S2400 ASIO Driver – die Isla allein</h2>
+<p>Wähle in deiner Audio-Software als ASIO-Gerät <b>„S2400 ASIO Driver“</b>. Die Einstellungen öffnest du über das Hardware-Setup bzw. Control Panel der Software.</p>
+{{IMG isla_treiber | Einstellungsfenster des S2400 ASIO Driver}}
+<table>
+  <tr><th style="width:30%">Einstellung</th><th>Bedeutung</th></tr>
+  <tr><td><span class="ui">Samplerate</span></td><td>44,1 oder 48 kHz. Die Isla läuft über USB immer mit 48 kHz; 44,1 kHz rechnet der Treiber in Studioqualität um.</td></tr>
+  <tr><td><span class="ui">Paketgröße</span></td><td>Puffergröße in Samples bei 48 kHz. Kleiner = weniger Latenz, größer = robuster. 128 fehlt mit Absicht: bei dieser Größe liefert die Isla zu wenige Samples.</td></tr>
+  <tr><td><span class="ui">Latenzkorrektur</span> Eingang/Ausgang</td><td>Wird zur gemeldeten Latenz addiert, damit Aufnahmen exakt im Raster liegen. Umschalt = 10er-, Strg = 100er-Schritte, Mausrad geht auch.</td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2>4 S2400 Aggregate – die Isla zusammen mit einem anderen ASIO-Gerät</h2>
+<p>Windows kann – anders als macOS – keine Audio-Geräte zusammenfassen. Das übernimmt der Verbund: Dein Audio-Interface gibt Takt, Samplerate und Puffergröße vor, die Isla läuft mit einer laufenden Takt-Angleichung mit. In der Audio-Software wählst du <b>„S2400 Aggregate“</b> und siehst alle Ein- und Ausgänge beider Geräte in einem.</p>
+{{IMG aggregate_einstellungen | Einstellungsfenster des Verbunds (aus der Audio-Software über das Hardware-Setup oder über das Menü des S2400 Monitor)}}
+<h3>Linke Spalte – Geräte</h3>
+<ul>
+  <li><span class="ui">Master-Gerät (Taktgeber)</span>: jedes installierte ASIO-Gerät außer den S2400-Treibern selbst. Über <span class="ui">Einstellungen des Master-Geräts</span> öffnest du dessen eigenes Fenster (Puffergröße, Samplerate). Den Master nicht zusätzlich direkt in derselben Software aktivieren – sie nutzt ihn bereits über „S2400 Aggregate“.</li>
+  <li><span class="ui">Windows-Ausgang (optional)</span>: optional ein zusätzlicher Ausgang über Windows, z.B. die Onboard-Soundkarte für den Zuspieler. <span class="ui">Exklusiv-Modus (geringere Latenz)</span>: das Gerät gehört dann allein dem Verbund.</li>
+</ul>
+<h3>Rechte Spalte – Isla</h3>
+<ul>
+  <li><span class="ui">Paketgröße</span> der Isla und <span class="ui">Reserve</span> (<i>Normal 2 ms</i> oder <i>Hoch 5 ms</i> bei Aussetzern).</li>
+  <li><span class="ui">Laufzeitausgleich</span> – <span class="ui">Eingänge angleichen</span>: Master- und Isla-Eingänge kommen zeitgleich in der Software an. <span class="ui">Korrektur Isla-Eingang</span>: Wandler-/USB-Zeit der Isla laut Messung (positiv = Isla später).</li>
+  <li><span class="ui">Isla-Monitoring</span>: siehe Kapitel 5.</li>
+</ul>
+<p>Oben im Fenster zeigt eine Statuszeile Samplerate, Puffer, Latenz und den Zustand der Isla (<i>Synchron</i>, <i>Gleicht an</i>, <i>Aussetzer</i> …).</p>
+
+<!-- ============================================================ -->
+<h2>5 Isla-Monitoring und S2400 Monitor</h2>
+<p>Mit dem Isla-Monitoring hörst du die Isla direkt über die Ausgänge deines Audio-Interfaces – digital, ohne Mischpult. Damit das auch ohne Audio-Software funktioniert, hält <b>S2400 Monitor</b> den Verbund offen. Das Programm sitzt als Symbol im Infobereich der Taskleiste.</p>
+<table>
+  <tr><th style="width:38%">Menüpunkt</th><th>Wirkung</th></tr>
+  <tr><td><span class="ui">Mixer &amp; Matrix …</span></td><td>öffnet den Isla-Mixer (Kapitel 6).</td></tr>
+  <tr><td><span class="ui">Zuspieler (Samples in die Isla) …</span></td><td>öffnet den Zuspieler (Kapitel 7).</td></tr>
+  <tr><td><span class="ui">Einstellungen …</span></td><td>Einstellungsfenster des Verbunds.</td></tr>
+  <tr><td><span class="ui">Neu verbinden</span></td><td>Verbund neu starten, z.B. nachdem die Isla eingeschaltet wurde.</td></tr>
+  <tr><td><span class="ui">Pausieren (Master und Isla freigeben)</span></td><td>gibt Audio-Interface und Isla frei und greift nicht wieder zu, bis du <i>Neu verbinden</i> wählst.</td></tr>
+  <tr><td><span class="ui">Mit Windows starten</span></td><td>Autostart ein/aus.</td></tr>
+</table>
+<h3>Übergabe an die Audio-Software</h3>
+<p>Startet eine Audio-Software einen der S2400-Treiber, gibt S2400 Monitor Master und Isla automatisch frei und übernimmt nach dem Beenden wieder. Das Symbol zeigt dann <i>An Audio-Software übergeben</i>.</p>
+<div class="note warn"><b>Programme, die dein Audio-Interface direkt öffnen</b> (z.B. die Software des Interface-Herstellers oder eine DAW mit dem ASIO-Treiber des Interfaces statt „S2400 Aggregate“), erkennt S2400 Monitor nicht. Dann verstummt das Isla-Monitoring. Vorher im Menü <span class="ui">Pausieren</span> wählen und danach <span class="ui">Neu verbinden</span>.</div>
+<div class="note">In der Audio-Software das Monitoring der Isla-Spuren auf <b>„Aus“</b> stellen, solange das Isla-Monitoring an ist – sonst ist die Isla doppelt zu hören.</div>
+
+<!-- ============================================================ -->
+<h2>6 Isla-Mixer</h2>
+<p>Der Isla-Mixer regelt, wie die Isla-Kanäle auf den Ausgängen deines Audio-Interfaces ankommen. Er wirkt in jedem Programm, in dem der Verbund gerade läuft (Audio-Software oder S2400 Monitor) – die Kopfzeile zeigt, wo.</p>
+{{IMG mixer | Isla-Mixer: Kanalzüge oben, Routing zu den Ausgängen des Masters unten}}
+<ul>
+  <li><b>Kanalzüge</b>: je Isla-Kanal Pegel, Panorama und Ein/Aus.</li>
+  <li><b>Routing zu den Ausgängen des Masters</b>: welcher Isla-Kanal auf welches Ausgangspaar geht – mehrere Ziele gleichzeitig sind möglich.</li>
+  <li>Fader und Knöpfe: Doppelklick = 0 dB bzw. Mitte, Mausrad = 1 dB bzw. 5 %, mit Umschalt in größeren Schritten.</li>
+</ul>
+<p>Läuft der Verbund gerade nirgends, merkt sich der Mixer die Einstellungen für den nächsten Start.</p>
+
+<!-- ============================================================ -->
+<h2>7 Isla-Zuspieler – Samples in die Isla spielen</h2>
+<p>Der Zuspieler spielt Samples und Loops über die Onboard-Soundkarte analog auf <b>Line 1&amp;2</b> der Isla. Dort sampelst du sie wie von Platte – z.B. mit 26 kHz/12 Bit für den klassischen Sound. Der Zuspieler arbeitet wie ein kleines Plattenspieler-Studio vor der Isla.</p>
+{{IMG zuspieler_stack | Zuspieler mit einem geladenen Stack aus mehreren Spuren}}
+
+<h3>Spuren</h3>
+<ul>
+  <li>Bis zu <b>8 Spuren</b>. Samples links aus der Liste ziehen, aus dem Explorer oder direkt aus Splice ablegen, oder <span class="ui">Neue Spur</span> / <span class="ui">In Spur 1</span>.</li>
+  <li><b>Spur 1 führt</b>: ihr Tempo ist das Stack-Tempo, alle weiteren Spuren folgen ihr wie von Platte.</li>
+  <li>Je Spur: <span class="ui">PITCH</span> (Halbtöne/Cent), <span class="ui">PEGEL</span>, <span class="ui">M</span> stumm, <span class="ui">S</span> solo, Anzeige von BPM, Faktor und Tonart.</li>
+</ul>
+
+<h3>Plattenspieler und Stack-Tempo</h3>
+<ul>
+  <li><span class="ui">33 → 45</span>, <span class="ui">45 → 78</span>, <span class="ui">+1 Okt.</span>: Tempo und Tonhöhe ändern sich gemeinsam – wie beim Plattenspieler. <span class="ui">Original</span> setzt zurück.</li>
+  <li><span class="ui">STACK-TEMPO</span>: mit − / + oder Zahl anklicken und eintippen. Vier Schlag-LEDs laufen im Takt mit.</li>
+  <li><span class="ui">TONHÖHE HALTEN</span>: Tempo ändern, Tonhöhe bleibt. Ausgeschaltet verhält sich das Tempo wie eine Platte.</li>
+  <li>Der Plattenspieler wirkt zusätzlich auf das eingestellte Tempo: erst den Loop langsamer stellen, dann z.B. 33 → 45.</li>
+</ul>
+
+<h3>Abspielen</h3>
+<ul>
+  <li><span class="ui">Abspielen</span> bzw. Leertaste startet und stoppt. <span class="ui">SCHLEIFE</span> loopt alle Spuren auf einem gemeinsamen Raster – nichts läuft auseinander. <span class="ui">VORLAUF 1 s</span> startet die Wiedergabe mit einer Sekunde Vorlauf.</li>
+  <li><span class="ui">VORHÖREN</span> (mit eigenem Pegel) spielt ein Sample aus der Liste an, wahlweise <span class="ui">IM TEMPO</span> des Stacks.</li>
+</ul>
+
+<h3>Editor</h3>
+<p>Unten wählst du je Spur Start und Ende (<span class="ui">NULLDURCHGANG</span> rastet an Nulldurchgängen ein, <span class="ui">BEREICH HÖREN</span>, <span class="ui">ZURÜCKSETZEN</span>), siehst die Länge im Original und in der Isla und stellst <span class="ui">PITCH FEIN</span>. Rad = Zoom, Umschalt+Rad = schieben, Doppelklick = alles.</p>
+
+<h3>Einzelsounds aus Drumloops</h3>
+{{IMG zuspieler_einzelsounds | Editor im Modus EINZELSOUNDS: Marken an den Anschlägen, darunter die Pads}}
+<ul>
+  <li><span class="ui">EINZELSOUNDS</span> im Editor zerlegt einen Loop an den Anschlägen.</li>
+  <li><span class="ui">EMPFINDLICH</span>: wie deutlich ein Schlag einsetzen muss. <span class="ui">SCHWELLE</span>: wie leise er sein darf.</li>
+  <li><span class="ui">MANUELL</span> (z.B. für Klavier): keine Erkennung, Marken per Doppelklick setzen. <span class="ui">LEEREN</span> entfernt alle Marken. Eine Marke löschen: Rechtsklick auf die Marke oder Entf.</li>
+  <li>Pad klicken = anhören, Strg+Klick = auswählen (<span class="ui">ALLE</span> / <span class="ui">KEINE</span>). <span class="ui">AUSWAHL SPEICHERN</span> schreibt jeden gewählten Sound als WAV – so, wie er klingt, mit Plattenspieler, Pitch und Pegel. Dateinamen sind fortlaufende Nummern.</li>
+</ul>
+
+<h3>Stacks speichern und laden</h3>
+<ul>
+  <li><span class="ui">STACK SPEICHERN</span> sichert alle Spuren mit allen Einstellungen als <code>.s2400stack</code>. Alles landet in dem Ordner, den du wählst: Stack-Datei, Kopien der benutzten Samples und der Ordner <code>&lt;Stack&gt; Einzelsounds</code> mit den gewählten Einzelsounds.</li>
+  <li><span class="ui">STACK LADEN</span> öffnet einen gespeicherten Stack – oder einen <b>Splice-Stack</b>: in Splice <i>Export → Stems</i>, dann die ZIP-Datei wählen und angeben, wohin die Stems entpackt werden. Jeder Stem wird eine Spur, Tempo und Tonart werden übernommen.</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2>8 Wichtige Hinweise und Fehlersuche</h2>
+<ul>
+  <li><b>Nicht beide Treiber gleichzeitig</b>: „S2400 ASIO Driver“ und „S2400 Aggregate“ nicht gleichzeitig in zwei Programmen benutzen – beide greifen direkt auf die Isla zu.</li>
+  <li><b>Exklusiv-Modus beim Windows-Ausgang</b>: Solange die Audio-Engine läuft, gehört das Gerät allein dem Verbund; andere Programme sind dort stumm.</li>
+  <li><b>Isla nach dem Treiber eingeschaltet?</b> Im S2400 Monitor <span class="ui">Neu verbinden</span> wählen.</li>
+</ul>
+<table>
+  <tr><th style="width:38%">Problem</th><th>Lösung</th></tr>
+  <tr><td>Kein Isla-Monitoring mehr, obwohl der Monitor „aktiv“ zeigt</td><td>Ein anderes Programm hat das Audio-Interface direkt geöffnet (z.B. die Software des Interface-Herstellers). Programm schließen, dann <span class="ui">Neu verbinden</span>. Künftig vorher <span class="ui">Pausieren</span>.</td></tr>
+  <tr><td>Isla doppelt zu hören</td><td>In der Audio-Software das Monitoring der Isla-Spuren auf „Aus“ stellen.</td></tr>
+  <tr><td>Knackser / Aussetzer</td><td>Im Verbund <span class="ui">Reserve</span> auf <i>Hoch 5 ms</i> oder eine größere Paketgröße wählen.</td></tr>
+  <tr><td>Aufnahmen liegen nicht exakt im Raster</td><td>Latenzkorrektur (Isla-Treiber) bzw. <span class="ui">Korrektur Isla-Eingang</span> (Verbund) anpassen. Versatz von mehreren hundert Millisekunden kommt meist von Plugin-Latenz im Projekt, nicht vom Treiber.</td></tr>
+  <tr><td>Zuspieler kommt nur auf einer Seite an</td><td>Kabel und Eingangswahl an der Isla prüfen (Line 1&amp;2).</td></tr>
+</table>
+<h3>Protokolldateien</h3>
+<p>Beide Treiber schreiben ein Protokoll, das bei der Fehlersuche hilft: <code>%TEMP%\S2400AsioDriver.log</code> und <code>%TEMP%\S2400Aggregate.log</code>.</p>
+
+
+<!-- ============================================================ -->
+<h2>9 Nutzung, Support und Haftung</h2>
+<p>Diese Software ist ein privates Projekt. Ich habe sie ursprünglich nur für mein eigenes Studio geschrieben und stelle sie jetzt kostenlos allen zur Verfügung, die sie nützlich finden.</p>
+<ul>
+  <li><b>Nur Windows:</b> Die Software läuft bisher ausschließlich unter Windows (64 Bit). Eine Version für macOS oder andere Systeme gibt es nicht.</li>
+  <li><b>Kein Support:</b> Ich kann keine Unterstützung, Beratung oder Fehlerbehebung leisten und keine Anfragen beantworten. Es besteht kein Anspruch auf Updates, Korrekturen oder neue Funktionen.</li>
+  <li><b>Keine Gewährleistung:</b> Die Software wird so bereitgestellt, wie sie ist. Ich übernehme keine Garantie dafür, dass sie fehlerfrei läuft, mit deiner Hardware oder Software zusammenarbeitet oder für einen bestimmten Zweck geeignet ist.</li>
+  <li><b>Keine Haftung:</b> Die Nutzung erfolgt auf eigene Gefahr. Soweit gesetzlich zulässig, hafte ich nicht für Schäden, die durch die Installation oder Nutzung entstehen – etwa Datenverlust, verlorene Aufnahmen, Ausfälle oder Schäden an Hardware, Software oder Gehör. Unberührt bleibt die Haftung, die gesetzlich nicht ausgeschlossen werden kann (insbesondere bei Vorsatz und grober Fahrlässigkeit).</li>
+  <li><b>Lautstärke:</b> Treiber und Programme greifen direkt in den Audioweg ein. Stelle Abhöre und Kopfhörer beim ersten Start leise.</li>
+  <li><b>Kein Produkt von ISLA Instruments:</b> Die Software ist unabhängig entstanden und wird von ISLA Instruments weder vertrieben noch unterstützt. Bitte wende dich mit Fragen zu dieser Software nicht an ISLA Instruments.</li>
+  <li><b>Lizenz und Quellcode:</b> Copyright (C) 2026 David Ritter. Die Software ist freie Software unter der GNU General Public License, Version 3 (GPLv3): Du darfst sie nutzen, weitergeben und verändern, wenn du die Bedingungen der GPLv3 einhältst. Der Lizenztext liegt als <code>LICENSE.txt</code> im Programmordner, der Quellcode steht unter <code>https://github.com/bubustyles/S2400-ASIO-Drivers</code>. Deine Rechte aus der GPLv3 bleiben von diesen Hinweisen unberührt.</li>
+  <li><b>Marken:</b> ASIO ist eine eingetragene Marke der Steinberg Media Technologies GmbH (ASIO is a registered trademark of Steinberg Media Technologies GmbH.) ISLA Instruments und S2400 sind Marken ihrer jeweiligen Inhaber. Alle anderen genannten Namen gehören ihren Inhabern.</li>
+</ul>
+<p>Das Setup zeigt diese Bedingungen vor der Installation an; installiert wird nur, wenn du sie annimmst. Nach der Installation liegen sie als <code>Nutzungsbedingungen.txt</code> im Programmordner.</p>
+
+</body>
+</html>

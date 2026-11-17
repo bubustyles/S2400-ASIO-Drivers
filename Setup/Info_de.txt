@@ -1,0 +1,78 @@
+﻿S2400 ASIO-Treiber - kurze Hinweise
+====================================
+
+ISLA S2400 ASIO Driver
+  Die Isla direkt als ASIO-Gerät (Kernel Streaming), 10 Eingänge, 2 Ausgänge.
+  In der Audio-Software (DAW) als ASIO-Gerät
+  "S2400 ASIO Driver" wählen. Samplerate (44,1/48 kHz), Paketgröße und
+  Latenzkorrektur stellt man im Einstellungsfenster des Treibers ein
+  ("Hardware-Setup" bzw. "Control Panel" der Software).
+
+S2400 Aggregate
+  Fasst mehrere Geräte zu EINEM ASIO-Gerät zusammen:
+  - ein ASIO-Master (dein Audio-Interface) gibt Takt, Samplerate und Puffer vor,
+  - die Isla läuft im Takt des Masters mit (laufende Angleichung),
+  - optional ein Windows-Ausgang (z.B. die Onboard-Soundkarte).
+  Voraussetzung: ein weiteres ASIO-Gerät als Master.
+  In der Audio-Software "S2400 Aggregate" wählen und im Einstellungsfenster
+  Master, Isla und Windows-Ausgang festlegen.
+
+Isla-Monitoring und S2400 Monitor
+  Im Einstellungsfenster des Verbunds (rechte Spalte "Isla-Monitoring") lässt
+  sich die Isla direkt auf ein Ausgangspaar des Masters legen, z.B. die
+  Monitore am Audio-Interface - digital, ohne Mischpult. Je Kanalpaar der Isla
+  (Mix, Out 1/2 ... 7/8) gibt es Ein/Aus und Pegel.
+  Damit das auch ohne Audio-Software funktioniert, hält das Hilfsprogramm
+  "S2400 Monitor" (Symbol im Infobereich der Taskleiste) den Verbund offen.
+  Startet eine Audio-Software einen der S2400-Treiber, gibt S2400 Monitor
+  Master und Isla automatisch frei und übernimmt nach dem Beenden wieder.
+  In der Audio-Software das Monitoring der Isla-Spuren auf "Aus" stellen, solange das
+  Isla-Monitoring an ist - sonst ist die Isla doppelt zu hören.
+
+Isla-Zuspieler und Isla-Mixer als eigene Programme
+  „S2400 Zuspieler“ und „S2400 Isla-Mixer“ stehen im Startmenü (auf Wunsch auch
+  auf dem Desktop). Zum Anheften: Rechtsklick auf das Symbol -> „An Taskleiste
+  anheften“. Das Menü des S2400 Monitor startet dieselben Programme.
+
+Isla-Zuspieler (eigenes Programm, auch über das Menü des S2400 Monitor)
+  Spielt Samples und Loops über die Onboard-Soundkarte auf Line 1&2
+  der Isla, dort mit 26 kHz/12 Bit sampeln.
+  Bis zu 8 Spuren: Spur 1 führt (Plattenspieler 33->45, 45->78, +1 Oktave:
+  Tempo und Tonhöhe gemeinsam), weitere Spuren folgen ihrem Tempo wie von
+  Platte. Je Spur Pitch (Halbtöne/Cent), Pegel, Stumm, Solo, Start-/Endmarke.
+  STACK-TEMPO frei einstellbar (−/+ oder Zahl anklicken und eintippen), vier
+  Schlag-LEDs laufen mit. TONHÖHE HALTEN: Tempo ändern, Tonhöhe bleibt.
+  Der Plattenspieler wirkt zusätzlich auf das eingestellte Tempo (erst Loop
+  langsamer stellen, dann z.B. 33->45).
+  Vorhören mit eigenem Pegel, Schleife (alle Spuren auf einem gemeinsamen
+  Raster, nichts läuft auseinander), Vorlauf 1 s, Leertaste = Abspielen/Stopp.
+  STACK SPEICHERN/LADEN sichert alle Spuren mit Einstellungen als
+  .s2400stack. Alles kommt in den Ordner, den du wählst: Stack-Datei,
+  Kopien der benutzten Samples und der Ordner mit den Einzelsounds.
+  STACK LADEN öffnet auch einen Splice-Stack: in Splice Export -> Stems,
+  dann die ZIP-Datei wählen und den Ordner für die Stems angeben (jeder
+  Stem wird eine Spur).
+  Dateien lassen sich auch aus dem Explorer oder aus Splice ablegen.
+  EINZELSOUNDS (im Editor): zerlegt einen Drumloop an den Anschlägen in
+  Einzelsounds. Pad klicken = anhören, Strg+Klick = auswählen, AUSWAHL SPEICHERN
+  schreibt jeden gewählten Sound als WAV (24 Bit), so wie er klingt (mit
+  Plattenspieler und Pitch).
+  EMPFINDLICH = wie deutlich ein Schlag einsetzen muss, SCHWELLE = wie leise
+  er sein darf. MANUELL (z.B. Klavier): keine Erkennung, Marken per
+  Doppelklick; LEEREN entfernt alle Marken.
+  Marke löschen: Rechtsklick auf die Marke oder Entf. STACK SPEICHERN sichert die
+  Marken mit und legt die gewählten Einzelsounds in den Ordner
+  "<Stack> Einzelsounds" neben der Stack-Datei.
+
+Wichtig
+  - Den "S2400 ASIO Driver" und "S2400 Aggregate" nicht gleichzeitig in zwei
+    Programmen benutzen - beide greifen direkt auf die Isla zu.
+  - Den Master nicht zusätzlich direkt in derselben Software
+    aktivieren, wenn er im Verbund läuft.
+  - Exklusiv-Modus beim Windows-Ausgang: Solange die Audio-Engine läuft,
+    gehört das Gerät allein dem Verbund (andere Programme sind dort stumm).
+
+Lizenz
+  Freie Software unter der GPLv3, Copyright (C) 2026 David Ritter.
+  Quellcode: https://github.com/bubustyles/S2400-ASIO-Drivers
+  ASIO is a registered trademark of Steinberg Media Technologies GmbH.

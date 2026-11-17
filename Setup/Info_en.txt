@@ -1,0 +1,77 @@
+﻿S2400 ASIO drivers - quick notes
+================================
+
+ISLA S2400 ASIO Driver
+  The Isla directly as an ASIO device (Kernel Streaming), 10 inputs, 2 outputs.
+  In your audio software (DAW) select the ASIO
+  device "S2400 ASIO Driver". Sample rate (44.1/48 kHz), packet size and
+  latency correction are set in the driver's settings window ("Hardware
+  Setup" or "Control Panel" in your software).
+
+S2400 Aggregate
+  Combines several devices into ONE ASIO device:
+  - an ASIO master (your audio interface) sets clock, sample rate and buffer,
+  - the Isla follows the master's clock (continuous adjustment),
+  - optionally a Windows output (e.g. the onboard sound card).
+  Requirement: another ASIO device to act as master.
+  Select "S2400 Aggregate" in your audio software and choose master, Isla
+  and Windows output in its settings window.
+
+Isla monitoring and S2400 Monitor
+  In the aggregate's settings window (right column "Isla monitoring") the
+  Isla can be routed directly to an output pair of the master, e.g. the
+  monitors on your audio interface - digitally, without a mixer. Each channel pair of the
+  Isla (Mix, Out 1/2 ... 7/8) has on/off and level.
+  To make this work without audio software, the helper "S2400 Monitor" (icon in the
+  notification area of the taskbar) keeps the aggregate open. When audio
+  software opens one of the S2400 drivers, S2400 Monitor releases master and Isla
+  automatically and takes over again afterwards.
+  In your audio software set monitoring of the Isla tracks to "Off" while Isla monitoring
+  is on - otherwise the Isla is heard twice.
+
+Isla feeder and Isla mixer as programs of their own
+  "S2400 Zuspieler" and "S2400 Isla-Mixer" are in the Start menu (optionally
+  also on the desktop). To pin: right-click the icon -> "Pin to taskbar".
+  The S2400 Monitor menu starts the same programs.
+
+Isla feeder (program of its own, also from the S2400 Monitor menu)
+  Plays samples and loops through the onboard sound card into
+  line 1&2 of the Isla, to be sampled there at 26 kHz/12 bit.
+  Up to 8 tracks: track 1 leads (turntable 33->45, 45->78, +1 octave: tempo
+  and pitch together), further tracks follow its tempo like a record. Per
+  track pitch (semitones/cents), level, mute, solo, start/end markers.
+  STACK TEMPO freely adjustable (-/+ or click the number and type), four
+  beat LEDs follow playback. KEEP PITCH: change tempo, pitch stays.
+  The turntable works on top of the set tempo (slow the loop down first,
+  then e.g. 33->45).
+  Preview with its own level, loop (all tracks on one common grid, nothing
+  drifts apart), 1 s pre-roll, space bar = play/stop.
+  SAVE/LOAD STACK stores all tracks with their settings as .s2400stack
+  in the folder you choose, together with copies of the samples used and
+  the folder with the single hits.
+  LOAD STACK also opens a Splice stack: in Splice Export -> Stems, then
+  choose the ZIP file and the folder for the stems (each stem becomes a
+  track).
+  Files can also be dropped from Explorer or Splice.
+  SINGLE HITS (in the editor): splits a drum loop at its hits. Click a pad
+  = audition, Ctrl+click = select, SAVE SELECTION writes each selected hit
+  as WAV (24 bit), as it sounds (with turntable and pitch).
+  SENSITIVITY = how sharply a hit must start, THRESHOLD = how quiet it may
+  be. MANUAL (e.g. piano): no detection, set markers by double-click; CLEAR
+  removes all markers.
+  Delete a marker: right-click it or press Del. SAVE STACK also stores the
+  markers and puts the selected hits into the folder "<stack> single hits"
+  next to the stack file.
+
+Important
+  - Do not use "S2400 ASIO Driver" and "S2400 Aggregate" in two programs at
+    the same time - both access the Isla directly.
+  - Do not additionally enable the master directly in the same
+    software while it runs inside the aggregate.
+  - Exclusive mode for the Windows output: while the audio engine runs, the
+    device belongs to the aggregate alone (other programs are silent there).
+
+License
+  Free software under the GPLv3, Copyright (C) 2026 David Ritter.
+  Source code: https://github.com/bubustyles/S2400-ASIO-Drivers
+  ASIO is a registered trademark of Steinberg Media Technologies GmbH.

@@ -1,0 +1,21 @@
+# Delphi build output
+Win64/
+Win32/
+__history/
+__recovery/
+*.dcu
+*.exe
+*.dll
+*.rsm
+*.map
+*.identcache
+*.local
+*.stat
+*.dsk
+
+# Generated files
+Output/
+Handbuch/*.pdf
+
+# Windows
+Thumbs.db

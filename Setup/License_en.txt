@@ -1,0 +1,52 @@
+﻿S2400 ASIO Drivers - Use, support and liability
+===============================================
+
+This software is a private project. I originally wrote it for my own studio
+only and am now making it available free of charge to anyone who finds it
+useful.
+
+Copyright (C) 2026 David Ritter
+
+LICENSE AND SOURCE CODE
+This software is free software under the GNU General Public License,
+version 3 (GPLv3). You may use, share and modify it under the terms of the
+GPLv3. The full license text is included as LICENSE.txt in the program
+folder; the source code is available here:
+https://github.com/bubustyles/S2400-ASIO-Drivers
+
+WINDOWS ONLY
+So far the software runs on Windows (64-bit) only. There is no version for
+macOS or other systems.
+
+NO SUPPORT
+I cannot provide support, advice or troubleshooting, and I cannot answer
+requests. There is no entitlement to updates, fixes or new features.
+
+NO WARRANTY
+The software is provided "as is". I give no guarantee that it works without
+errors, works together with your hardware or software, or is suitable for any
+particular purpose.
+
+NO LIABILITY
+You use it at your own risk. To the extent permitted by law, I am not liable
+for any damage caused by installing or using it - such as data loss, lost
+recordings, failures, or damage to hardware, software or hearing. Liability
+that cannot be excluded by law (in particular for intent and gross
+negligence) remains unaffected.
+
+VOLUME
+The drivers and programs act directly on the audio path. Turn monitors and
+headphones down when starting for the first time.
+
+NOT A PRODUCT OF ISLA INSTRUMENTS
+This software was developed independently and is neither distributed nor
+supported by ISLA Instruments. Please do not contact ISLA Instruments with
+questions about this software.
+
+TRADEMARKS
+ASIO is a registered trademark of Steinberg Media Technologies GmbH.
+ISLA Instruments and S2400 are trademarks of their respective owners. All other names mentioned
+belong to their owners.
+
+By installing, you agree to these terms. Your rights under the GPLv3 remain
+unaffected.
